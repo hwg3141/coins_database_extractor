@@ -2,10 +2,6 @@ def generate_searchable_html_table(data):
     if not data:
         return "<p>No data available</p>"
 
-    # Create sets of unique values for filtering
-    auction_names = sorted(set(entry.get("name", "N/A") for entry in data))
-    auction_numbers = sorted(set(entry.get("auction_name", "N/A") for entry in data))
-    
     # Start the HTML content
     html = '''
     <html>
@@ -27,8 +23,7 @@ def generate_searchable_html_table(data):
         </style>
         <script>
             function filterTable() {
-                var nameDropdown = document.getElementById("nameDropdown");
-                var selectedName = nameDropdown.value.toLowerCase();
+                var nameInput = document.getElementById("nameInput").value.toLowerCase();
                 var auctionNumberInput = document.getElementById("auctionNumberInput").value.toLowerCase();
                 var rows = document.querySelectorAll("#dataTable tbody tr");
                 
@@ -36,7 +31,7 @@ def generate_searchable_html_table(data):
                     var auctionName = row.getAttribute("data-auction-name").toLowerCase();
                     var auctionNumber = row.getAttribute("data-auction-number").toLowerCase();
                     
-                    var showRow = (selectedName === "All" || auctionName === selectedName) &&
+                    var showRow = (nameInput === "" || auctionName.includes(nameInput)) &&
                                    (auctionNumberInput === "" || auctionNumber.includes(auctionNumberInput));
                     
                     row.style.display = showRow ? "" : "none";
@@ -44,15 +39,14 @@ def generate_searchable_html_table(data):
             }
 
             function generateLotLink() {
-                var nameDropdown = document.getElementById("nameDropdown");
-                var selectedAuction = nameDropdown.value;
+                var selectedCheckbox = document.querySelector("input[name='auctionCheckbox']:checked");
                 var lotNumber = document.getElementById("lotNumberInput").value;
                 var linkOutput = document.getElementById("linkOutput");
 
-                if (selectedAuction !== "All" && lotNumber.trim() !== "") {
-                    var auctionNumber = document.querySelector(`option[value="${selectedAuction}"]`).dataset.number;
-                    var url = `https://www.numisbids.com/n.php?p=lot&sid=${auctionNumber}&lot=${lotNumber}`;
-                    linkOutput.innerHTML = `<a href="${url}" target="_blank">View Lot</a>`;
+                if (selectedCheckbox && lotNumber.trim() !== "") {
+                    var auctionSid = selectedCheckbox.dataset.sid;
+                    var url = `https://www.numisbids.com/n.php?lot=${lotNumber}&p=lot&sid=${auctionSid}`;
+                    linkOutput.innerHTML = `<a href="${url}" target="_blank">View Lot ${lotNumber} in Auction ${auctionSid}</a>`;
                 } else {
                     linkOutput.innerHTML = "Please select an auction and enter a lot number.";
                 }
@@ -61,23 +55,13 @@ def generate_searchable_html_table(data):
     </head>
     <body>
         <h1>Extracted Data</h1>
-        <label for="nameDropdown">Filter by Auction Name:</label>
-        <select id="nameDropdown" onchange="filterTable()">
-            <option value="All">All</option>
-    '''
-    
-    # Add options to the dropdown for auction names
-    for name in auction_names:
-        # Find the auction number corresponding to this auction name
-        auction_number = next((entry.get("auction_name", "N/A") for entry in data if entry.get("name") == name), "N/A")
-        html += f'<option value="{name}" data-number="{auction_number}">{name}</option>\n'
-    
-    html += '''
-        </select>
+        <label for="nameInput">Filter by Auction Name:</label>
+        <input type="text" id="nameInput" oninput="filterTable()" placeholder="Enter auction name">
         <br><br>
         <label for="auctionNumberInput">Filter by Auction Number:</label>
         <input type="text" id="auctionNumberInput" oninput="filterTable()" placeholder="Enter auction number">
         <br><br>
+        
         <label for="lotNumberInput">Enter Lot Number:</label>
         <input type="text" id="lotNumberInput">
         <button onclick="generateLotLink()">Generate Lot Link</button>
@@ -88,6 +72,7 @@ def generate_searchable_html_table(data):
         <table id="dataTable">
             <thead>
                 <tr>
+                    <th>Select</th>
                     <th>Auction Name</th>
                     <th>Auction Number</th>
                     <th>Date</th>
@@ -97,15 +82,19 @@ def generate_searchable_html_table(data):
             <tbody>
     '''
     
-    # Table rows
+    # Table rows with checkboxes
     for entry in data:
         auction_name = entry.get("name", "N/A")
         auction_number = entry.get("auction_name", "N/A")
         date = entry.get("date", "N/A")
         link = entry.get("link", "#")
         
+        # Extract the `sid` from the original URL
+        sid = link.split('sid=')[1] if 'sid=' in link else "N/A"
+        
         html += f'''
             <tr data-auction-name="{auction_name}" data-auction-number="{auction_number}">
+                <td><input type="radio" name="auctionCheckbox" value="{auction_name}" data-sid="{sid}"></td>
                 <td>{auction_name}</td>
                 <td>{auction_number}</td>
                 <td>{date}</td>
@@ -127,7 +116,7 @@ def generate_searchable_html_table(data):
 html_content = generate_searchable_html_table(details)
 
 # Save the HTML content to a file named 'htmldata2.txt'
-with open('htmldata2.txt', 'w', encoding='utf-8') as file:
+with open('htmldata.txt', 'w', encoding='utf-8') as file:
     file.write(html_content)
 
-print("Searchable HTML table has been saved to 'htmldata2.txt'.")
+print("Searchable HTML table has been saved to 'htmldata.txt'.")
