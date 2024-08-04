@@ -33,6 +33,21 @@
                     row.style.display = showRow ? "" : "none";
                 });
             }
+
+            function generateLotLink() {
+                var nameDropdown = document.getElementById("nameDropdown");
+                var selectedAuction = nameDropdown.value;
+                var lotNumber = document.getElementById("lotNumberInput").value;
+                var linkOutput = document.getElementById("linkOutput");
+
+                if (selectedAuction !== "All" && lotNumber.trim() !== "") {
+                    var auctionNumber = document.querySelector(`option[value="${selectedAuction}"]`).dataset.number;
+                    var url = `https://www.numisbids.com/n.php?p=lot&sid=${auctionNumber}&lot=${lotNumber}`;
+                    linkOutput.innerHTML = `<a href="${url}" target="_blank">View Lot</a>`;
+                } else {
+                    linkOutput.innerHTML = "Please select an auction and enter a lot number.";
+                }
+            }
         </script>
     </head>
     <body>
@@ -40,293 +55,299 @@
         <label for="nameDropdown">Filter by Auction Name:</label>
         <select id="nameDropdown" onchange="filterTable()">
             <option value="All">All</option>
-    <option value="17 Auctions S.L">17 Auctions S.L</option>
-<option value="2020 Auctions">2020 Auctions</option>
-<option value="51 Gallery">51 Gallery</option>
-<option value="A. Karamitsos">A. Karamitsos</option>
-<option value="AA Muntenveiling">AA Muntenveiling</option>
-<option value="ACM Aste srl">ACM Aste srl</option>
-<option value="ANTIUM AURUM s.r.o.">ANTIUM AURUM s.r.o.</option>
-<option value="Agora Auctions, LLC">Agora Auctions, LLC</option>
-<option value="Al Sur del Mundo">Al Sur del Mundo</option>
-<option value="Alde">Alde</option>
-<option value="Alfa Numismatics ApS">Alfa Numismatics ApS</option>
-<option value="Antykwariat Dawid Janas">Antykwariat Dawid Janas</option>
-<option value="Antykwariat Numizmatyczny - Michał Niemczyk">Antykwariat Numizmatyczny - Michał Niemczyk</option>
-<option value="Apollo Auctions Ltd">Apollo Auctions Ltd</option>
-<option value="Aquila Numismatics">Aquila Numismatics</option>
-<option value="Arcas Numismatics Ltd">Arcas Numismatics Ltd</option>
-<option value="Archives International Auctions">Archives International Auctions</option>
-<option value="Ares Numismatics">Ares Numismatics</option>
-<option value="Art-Rite S.r.l.">Art-Rite S.r.l.</option>
-<option value="Artemide Aste s.r.l.">Artemide Aste s.r.l.</option>
-<option value="Artmark">Artmark</option>
-<option value="Astarte S.A.">Astarte S.A.</option>
-<option value="Astarte S.A. Young Collectors">Astarte S.A. Young Collectors</option>
-<option value="Attica Auctions">Attica Auctions</option>
-<option value="Auction House Rare Coins">Auction House Rare Coins</option>
-<option value="Auction World">Auction World</option>
-<option value="Auctiones GmbH">Auctiones GmbH</option>
-<option value="Auktionen Frühwald">Auktionen Frühwald</option>
-<option value="Auktionen Münzhandlung Sonntag">Auktionen Münzhandlung Sonntag</option>
-<option value="Auktionshaus Peege e.K.">Auktionshaus Peege e.K.</option>
-<option value="Auktionshaus Ulrich Felzmann GmbH & Co. KG">Auktionshaus Ulrich Felzmann GmbH & Co. KG</option>
-<option value="Aurea Numismatika Praha">Aurea Numismatika Praha</option>
-<option value="Aureo & Calicó S.L.">Aureo & Calicó S.L.</option>
-<option value="Aurora S.p.a.">Aurora S.p.a.</option>
-<option value="BAC Numismatics">BAC Numismatics</option>
-<option value="Baldwin & Sons">Baldwin & Sons</option>
-<option value="Baldwin's Hong Kong Coin Auction">Baldwin's Hong Kong Coin Auction</option>
-<option value="Baldwin's of St. James's">Baldwin's of St. James's</option>
-<option value="BanglaNumis">BanglaNumis</option>
-<option value="Bentes Auctions">Bentes Auctions</option>
-<option value="Bertolami Fine Art">Bertolami Fine Art</option>
-<option value="Bid and Grow Corp.">Bid and Grow Corp.</option>
-<option value="Bolaffi Spa">Bolaffi Spa</option>
-<option value="Briggs & Bustos">Briggs & Bustos</option>
-<option value="Bruun Rasmussen">Bruun Rasmussen</option>
-<option value="Bucephalus Numismatic">Bucephalus Numismatic</option>
-<option value="Burgan Numismatique - Maison Florange">Burgan Numismatique - Maison Florange</option>
-<option value="CMA Auctions">CMA Auctions</option>
-<option value="Casa de Subastas de Madrid">Casa de Subastas de Madrid</option>
-<option value="Cayón Subastas">Cayón Subastas</option>
-<option value="Centre Numismatique du Palais-Royal">Centre Numismatique du Palais-Royal</option>
-<option value="Chaponnière & Firmenich SA">Chaponnière & Firmenich SA</option>
-<option value="Chiswick Auctions">Chiswick Auctions</option>
-<option value="Christoph Gärtner GmbH & Co. KG">Christoph Gärtner GmbH & Co. KG</option>
-<option value="Classical Numismatic Group, LLC">Classical Numismatic Group, LLC</option>
-<option value="Coins of History e.U.">Coins of History e.U.</option>
-<option value="Coins of the Realm Ltd">Coins of the Realm Ltd</option>
-<option value="Coins.ee OY">Coins.ee OY</option>
-<option value="CoinsNB">CoinsNB</option>
-<option value="CollecTodo">CollecTodo</option>
-<option value="Colonial Acres Coins Ltd.">Colonial Acres Coins Ltd.</option>
-<option value="Concordia Numismatic e.U.">Concordia Numismatic e.U.</option>
-<option value="Corinphila Veilingen">Corinphila Veilingen</option>
-<option value="Creusy Numismatique">Creusy Numismatique</option>
-<option value="Crown Currency">Crown Currency</option>
-<option value="Daniel Frank Sedwick, LLC">Daniel Frank Sedwick, LLC</option>
-<option value="Dara Antiques Museum">Dara Antiques Museum</option>
-<option value="Darabanth">Darabanth</option>
-<option value="Davissons Ltd.">Davissons Ltd.</option>
-<option value="Del Bosque, Briggs & Bustos">Del Bosque, Briggs & Bustos</option>
-<option value="Dom Aukcyjny Numimarket.pl">Dom Aukcyjny Numimarket.pl</option>
-<option value="Dorotheum GmbH & Co KG">Dorotheum GmbH & Co KG</option>
-<option value="Dr. Busso Peus Nachf.">Dr. Busso Peus Nachf.</option>
-<option value="Dutch Numismatic Auction">Dutch Numismatic Auction</option>
-<option value="Dvin Numismatik">Dvin Numismatik</option>
-<option value="Editions V. Gadoury">Editions V. Gadoury</option>
-<option value="Eid Mar Auctions GmbH">Eid Mar Auctions GmbH</option>
-<option value="Elstob & Elstob">Elstob & Elstob</option>
-<option value="Emporium Hamburg">Emporium Hamburg</option>
-<option value="Emporium Hamburg Alpha">Emporium Hamburg Alpha</option>
-<option value="Eretz Auctions">Eretz Auctions</option>
-<option value="Falcon Auctions">Falcon Auctions</option>
-<option value="Fellows Auctioneers Ltd">Fellows Auctioneers Ltd</option>
-<option value="Feydeau Bourse Numismatique">Feydeau Bourse Numismatique</option>
-<option value="Filatelie Klim">Filatelie Klim</option>
-<option value="Fontanille Coins">Fontanille Coins</option>
-<option value="Frankfurter Münzhandlung Nachf. GmbH">Frankfurter Münzhandlung Nachf. GmbH</option>
-<option value="Freeman & Sear">Freeman & Sear</option>
-<option value="Fritz Rudolf Künker GmbH & Co. KG">Fritz Rudolf Künker GmbH & Co. KG</option>
-<option value="GMA Numismatica Napoli srl">GMA Numismatica Napoli srl</option>
-<option value="Gemini, LLC">Gemini, LLC</option>
-<option value="Ginza Coins">Ginza Coins</option>
-<option value="Golden Lion Auctions">Golden Lion Auctions</option>
-<option value="Gorny & Mosch">Gorny & Mosch</option>
-<option value="Goudwisselkantoor Veilingen">Goudwisselkantoor Veilingen</option>
-<option value="Great Coins & Art Auctions srl">Great Coins & Art Auctions srl</option>
-<option value="Green Apple Auction">Green Apple Auction</option>
-<option value="H.D. Rauch">H.D. Rauch</option>
-<option value="Haljak Coin Auction">Haljak Coin Auction</option>
-<option value="Harlan J. Berk Ltd.">Harlan J. Berk Ltd.</option>
-<option value="Harmers of London Auctions Ltd.">Harmers of London Auctions Ltd.</option>
-<option value="Haynault">Haynault</option>
-<option value="Heidelberger Münzhandlung Herbert Grün">Heidelberger Münzhandlung Herbert Grün</option>
-<option value="Helios Numismatik">Helios Numismatik</option>
-<option value="Hellmuth Kricheldorf Verlag e.K.">Hellmuth Kricheldorf Verlag e.K.</option>
-<option value="Heritage Auctions Europe">Heritage Auctions Europe</option>
-<option value="Heritage World Coin Auctions">Heritage World Coin Auctions</option>
-<option value="Hermitage Fine Art">Hermitage Fine Art</option>
-<option value="Hess-Divo">Hess-Divo</option>
-<option value="Historama">Historama</option>
-<option value="Holmasto">Holmasto</option>
-<option value="Horizon Auction">Horizon Auction</option>
-<option value="Hosker Haynes Auctioneers Ltd">Hosker Haynes Auctioneers Ltd</option>
-<option value="Hôtel des Ventes Mosan SA">Hôtel des Ventes Mosan SA</option>
-<option value="Ibrahim's Collectibles">Ibrahim's Collectibles</option>
-<option value="Império Numis">Império Numis</option>
-<option value="InAsta S.p.A.">InAsta S.p.A.</option>
-<option value="International Coin Exchange Ltd">International Coin Exchange Ltd</option>
-<option value="Ira and Larry Goldberg Auctioneers">Ira and Larry Goldberg Auctioneers</option>
-<option value="Istra Numizmatika">Istra Numizmatika</option>
-<option value="Janus Auctions Ltd.">Janus Auctions Ltd.</option>
-<option value="Jean Elsen & ses Fils">Jean Elsen & ses Fils</option>
-<option value="Jean Vinchon Numismatique">Jean Vinchon Numismatique</option>
-<option value="Jencek Historical Enterprise, Inc.">Jencek Historical Enterprise, Inc.</option>
-<option value="Jesus Vico S.A.">Jesus Vico S.A.</option>
-<option value="KENDRO a.s.">KENDRO a.s.</option>
-<option value="KM Numismatics">KM Numismatics</option>
-<option value="Katz Coins Notes & Supplies Corp.">Katz Coins Notes & Supplies Corp.</option>
-<option value="Klondike">Klondike</option>
-<option value="Kolbe & Fanning">Kolbe & Fanning</option>
-<option value="Kölner Münzkabinett">Kölner Münzkabinett</option>
-<option value="La Galerie Numismatique Sarl">La Galerie Numismatique Sarl</option>
-<option value="La Galerie des Monnaies">La Galerie des Monnaies</option>
-<option value="Leipziger Münzhandlung Heidrun Höhn">Leipziger Münzhandlung Heidrun Höhn</option>
-<option value="Leland Little">Leland Little</option>
-<option value="Leu Numismatik AG">Leu Numismatik AG</option>
-<option value="London Coin Centre Inc.">London Coin Centre Inc.</option>
-<option value="London Coin Galleries - Künker">London Coin Galleries - Künker</option>
-<option value="London Coin Galleries Ltd">London Coin Galleries Ltd</option>
-<option value="London Coins Ltd">London Coins Ltd</option>
-<option value="Lugdunum GmbH">Lugdunum GmbH</option>
-<option value="Luna Auc Co., Ltd.">Luna Auc Co., Ltd.</option>
-<option value="MDC Monnaies de Collection sarl">MDC Monnaies de Collection sarl</option>
-<option value="MKIC">MKIC</option>
-<option value="Macho & Chlapovič">Macho & Chlapovič</option>
-<option value="Maison Palombo">Maison Palombo</option>
-<option value="Maison Pruvost Numismatique">Maison Pruvost Numismatique</option>
-<option value="Marciniak | Auction House">Marciniak | Auction House</option>
-<option value="Marudhar Arts">Marudhar Arts</option>
-<option value="Matos, Esteves & Pacheco">Matos, Esteves & Pacheco</option>
-<option value="Meister & Sonntag">Meister & Sonntag</option>
-<option value="Meyer Eek AS">Meyer Eek AS</option>
-<option value="Millon Auctions">Millon Auctions</option>
-<option value="Monedalia">Monedalia</option>
-<option value="Monety i Medale Romuald Sawicz">Monety i Medale Romuald Sawicz</option>
-<option value="Monnaies d'Antan">Monnaies d'Antan</option>
-<option value="Morton & Eden Ltd">Morton & Eden Ltd</option>
-<option value="Mowbray Collectables">Mowbray Collectables</option>
-<option value="Myntauktioner i Sverige AB">Myntauktioner i Sverige AB</option>
-<option value="Myntkompaniet/AB Philea">Myntkompaniet/AB Philea</option>
-<option value="Münz Zentrum Heinz-W. Müller">Münz Zentrum Heinz-W. Müller</option>
-<option value="Münzen & Medaillen GmbH">Münzen & Medaillen GmbH</option>
-<option value="Münzen Gut-Lynt GmbH">Münzen Gut-Lynt GmbH</option>
-<option value="Münzenhandlung G. Hirsch Nachfolger">Münzenhandlung G. Hirsch Nachfolger</option>
-<option value="Münzenhandlung Harald Möller GmbH">Münzenhandlung Harald Möller GmbH</option>
-<option value="Münzenonline Auctions">Münzenonline Auctions</option>
-<option value="NAC Numismatica SpA">NAC Numismatica SpA</option>
-<option value="NOA">NOA</option>
-<option value="Naville Numismatics Ltd.">Naville Numismatics Ltd.</option>
-<option value="Nihon Coin Auction">Nihon Coin Auction</option>
-<option value="Noble Numismatics Pty Ltd">Noble Numismatics Pty Ltd</option>
-<option value="Nomisma Aste srl">Nomisma Aste srl</option>
-<option value="Nomisma Spa">Nomisma Spa</option>
-<option value="Nomos AG">Nomos AG</option>
-<option value="Noonans">Noonans</option>
-<option value="Nuance Auction Galleries, Inc.">Nuance Auction Galleries, Inc.</option>
-<option value="Nudelman Numismatica">Nudelman Numismatica</option>
-<option value="Numis Arena">Numis Arena</option>
-<option value="Numis.be - Joselito Eeckhout">Numis.be - Joselito Eeckhout</option>
-<option value="NumisCorner">NumisCorner</option>
-<option value="NumisPoland">NumisPoland</option>
-<option value="Numisa">Numisa</option>
-<option value="Numisart GmbH">Numisart GmbH</option>
-<option value="Numisbalt">Numisbalt</option>
-<option value="Numisbing, LLC">Numisbing, LLC</option>
-<option value="Numisfitz GmbH">Numisfitz GmbH</option>
-<option value="Numision">Numision</option>
-<option value="Numisma SA">Numisma SA</option>
-<option value="Numismatica Ars Classica">Numismatica Ars Classica</option>
-<option value="Numismatica Ferrarese">Numismatica Ferrarese</option>
-<option value="Numismatica Genevensis SA">Numismatica Genevensis SA</option>
-<option value="Numismatica Luciani">Numismatica Luciani</option>
-<option value="Numismatica Ranieri S.r.l.">Numismatica Ranieri S.r.l.</option>
-<option value="Numismatica Tintinna">Numismatica Tintinna</option>
-<option value="Numismatik Zöttl">Numismatik Zöttl</option>
-<option value="Numismática Leilões">Numismática Leilões</option>
-<option value="Numismática ibercoin">Numismática ibercoin</option>
-<option value="Numisor SA">Numisor SA</option>
-<option value="Nuqud Gallery">Nuqud Gallery</option>
-<option value="Olivier Goujon Numismatique">Olivier Goujon Numismatique</option>
-<option value="Olympus Numismatics UG">Olympus Numismatics UG</option>
-<option value="Oslo Myntgalleri AS">Oslo Myntgalleri AS</option>
-<option value="Pandolfini s.r.l.">Pandolfini s.r.l.</option>
-<option value="Pannonia Terra Numizmatika">Pannonia Terra Numizmatika</option>
-<option value="Pashiz Coins Ltd">Pashiz Coins Ltd</option>
-<option value="Patrick Guillard Collection">Patrick Guillard Collection</option>
-<option value="Paul-Francis Jacquier Numismatique Antique">Paul-Francis Jacquier Numismatique Antique</option>
-<option value="Pecunem Online Auctions">Pecunem Online Auctions</option>
-<option value="Pegasus Auctions AB">Pegasus Auctions AB</option>
-<option value="Pesek Auctions">Pesek Auctions</option>
-<option value="Peter Rapp AG">Peter Rapp AG</option>
-<option value="Portuscalle Numismatica">Portuscalle Numismatica</option>
-<option value="Postiljonen AB">Postiljonen AB</option>
-<option value="Poznański Dom Aukcyjny">Poznański Dom Aukcyjny</option>
-<option value="Poznański Dom Aukcyjny & Podlaski Gabinet Numizmatyczny">Poznański Dom Aukcyjny & Podlaski Gabinet Numizmatyczny</option>
-<option value="Provenance Auctions">Provenance Auctions</option>
-<option value="Punctum Auctioneers Ltd.">Punctum Auctioneers Ltd.</option>
-<option value="Raritan Stamps Inc.">Raritan Stamps Inc.</option>
-<option value="Rhenumis by Dr. Reinhard Fischer">Rhenumis by Dr. Reinhard Fischer</option>
-<option value="Rimon Auctions">Rimon Auctions</option>
-<option value="Rio de la Plata">Rio de la Plata</option>
-<option value="Roma Numismatics Ltd">Roma Numismatics Ltd</option>
-<option value="Romano Auctions">Romano Auctions</option>
-<option value="Roschberg Mynthandel AS">Roschberg Mynthandel AS</option>
-<option value="Russian Heritage">Russian Heritage</option>
-<option value="Rzeszowski Dom Aukcyjny">Rzeszowski Dom Aukcyjny</option>
-<option value="Rönesans Salzgitter GmbH">Rönesans Salzgitter GmbH</option>
-<option value="SIA COINSTORE">SIA COINSTORE</option>
-<option value="SINCONA AG">SINCONA AG</option>
-<option value="Sartor Numismatica">Sartor Numismatica</option>
-<option value="Savoca Coins">Savoca Coins</option>
-<option value="Schulman b.v.">Schulman b.v.</option>
-<option value="Silicua Subastas">Silicua Subastas</option>
-<option value="Sima Aste Srl">Sima Aste Srl</option>
-<option value="Skanfil Auksjoner AS">Skanfil Auksjoner AS</option>
-<option value="Soler y Llach S.L.">Soler y Llach S.L.</option>
-<option value="Solidus Numismatik e.K.">Solidus Numismatik e.K.</option>
-<option value="Sovereign Rarities Ltd">Sovereign Rarities Ltd</option>
-<option value="Spink">Spink</option>
-<option value="Spink USA">Spink USA</option>
-<option value="St. James's / CNG">St. James's / CNG</option>
-<option value="St. James's Auctions">St. James's Auctions</option>
-<option value="Stack's Bowers & Ponterio">Stack's Bowers & Ponterio</option>
-<option value="Stary-Sklep Sylwester Kopyciński">Stary-Sklep Sylwester Kopyciński</option>
-<option value="Status International">Status International</option>
-<option value="Stephen Album Rare Coins">Stephen Album Rare Coins</option>
-<option value="Sultan's Auction">Sultan's Auction</option>
-<option value="Taisei">Taisei</option>
-<option value="Tauler & Fau Subastas">Tauler & Fau Subastas</option>
-<option value="Tel Aviv Stamps">Tel Aviv Stamps</option>
-<option value="Tennants Auctioneers">Tennants Auctioneers</option>
-<option value="Teutoburger Münzauktion GmbH">Teutoburger Münzauktion GmbH</option>
-<option value="The Bru Sale & Wellico Ltd.">The Bru Sale & Wellico Ltd.</option>
-<option value="The Canadian Numismatic Company">The Canadian Numismatic Company</option>
-<option value="The Coin Cabinet">The Coin Cabinet</option>
-<option value="The Coin House">The Coin House</option>
-<option value="The New York Sale">The New York Sale</option>
-<option value="The Royal Mint">The Royal Mint</option>
-<option value="The Scripophily Center bvba">The Scripophily Center bvba</option>
-<option value="Thomas Numismatics">Thomas Numismatics</option>
-<option value="TimeLine Auctions">TimeLine Auctions</option>
-<option value="Tosunidis Coin House">Tosunidis Coin House</option>
-<option value="Tradart">Tradart</option>
-<option value="Universum Coins GmbH">Universum Coins GmbH</option>
-<option value="V.L. Nummus">V.L. Nummus</option>
-<option value="VAuctions">VAuctions</option>
-<option value="VCD Auctions">VCD Auctions</option>
-<option value="VIA GmbH">VIA GmbH</option>
-<option value="Varesi s.r.l.">Varesi s.r.l.</option>
-<option value="WAG Online oHG">WAG Online oHG</option>
-<option value="WDA - MiM">WDA - MiM</option>
-<option value="Wannenes Art Auctions">Wannenes Art Auctions</option>
-<option value="Warin Global Investments">Warin Global Investments</option>
-<option value="Warszawskie Centrum Numizmatyczne">Warszawskie Centrum Numizmatyczne</option>
-<option value="Westfälische Auktionsgesellschaft">Westfälische Auktionsgesellschaft</option>
-<option value="Wilkes & Curtis">Wilkes & Curtis</option>
-<option value="World Banknote Auctions">World Banknote Auctions</option>
-<option value="Wójcicki - The Polish Auction House">Wójcicki - The Polish Auction House</option>
-<option value="Zeus Numismatics">Zeus Numismatics</option>
-<option value="cgb.fr">cgb.fr</option>
-<option value="iBelgica">iBelgica</option>
-<option value="iNumis">iNumis</option>
+    <option value="17 Auctions S.L" data-number="Auction 4">17 Auctions S.L</option>
+<option value="2020 Auctions" data-number="Banknote Auction March 2020">2020 Auctions</option>
+<option value="51 Gallery" data-number="February 2017 Auction">51 Gallery</option>
+<option value="A. Karamitsos" data-number="Auction 621">A. Karamitsos</option>
+<option value="AA Muntenveiling" data-number="Auction 59">AA Muntenveiling</option>
+<option value="ACM Aste srl" data-number="E-Live Auction 26">ACM Aste srl</option>
+<option value="ANTIUM AURUM s.r.o." data-number="Auction 1">ANTIUM AURUM s.r.o.</option>
+<option value="Agora Auctions, LLC" data-number="Numismatic Auction 5">Agora Auctions, LLC</option>
+<option value="Al Sur del Mundo" data-number="Auction 2">Al Sur del Mundo</option>
+<option value="Alde" data-number="October 2017 Auction">Alde</option>
+<option value="Alfa Numismatics ApS" data-number="Auction 1">Alfa Numismatics ApS</option>
+<option value="Antykwariat Dawid Janas" data-number="Auction 1">Antykwariat Dawid Janas</option>
+<option value="Antykwariat Numizmatyczny - Michał Niemczyk" data-number="Auction 4">Antykwariat Numizmatyczny - Michał Niemczyk</option>
+<option value="Apollo Auctions Ltd" data-number="Auction 1">Apollo Auctions Ltd</option>
+<option value="Aquila Numismatics" data-number="Auction 2">Aquila Numismatics</option>
+<option value="Arcas Numismatics Ltd" data-number="E-Auction 1">Arcas Numismatics Ltd</option>
+<option value="Archives International Auctions" data-number="Auction 18">Archives International Auctions</option>
+<option value="Ares Numismatics" data-number="Web Auction 1">Ares Numismatics</option>
+<option value="Art-Rite S.r.l." data-number="Auction 61">Art-Rite S.r.l.</option>
+<option value="Artemide Aste s.r.l." data-number="Auction XXXIX">Artemide Aste s.r.l.</option>
+<option value="Artmark" data-number="October 2022 Auction">Artmark</option>
+<option value="Astarte S.A." data-number="Web Auction 2">Astarte S.A.</option>
+<option value="Astarte S.A. Young Collectors" data-number="YC Auction 1">Astarte S.A. Young Collectors</option>
+<option value="Attica Auctions" data-number="Auction 2 & 3">Attica Auctions</option>
+<option value="Auction House Rare Coins" data-number="Auction 14">Auction House Rare Coins</option>
+<option value="Auction World" data-number="Auction 9">Auction World</option>
+<option value="Auctiones GmbH" data-number="eAuction 68">Auctiones GmbH</option>
+<option value="Auktionen Frühwald" data-number="Auction 100">Auktionen Frühwald</option>
+<option value="Auktionen Münzhandlung Sonntag" data-number="Auction 18">Auktionen Münzhandlung Sonntag</option>
+<option value="Auktionshaus Peege e.K." data-number="Auction 171">Auktionshaus Peege e.K.</option>
+<option value="Auktionshaus Ulrich Felzmann GmbH & Co. KG" data-number="eAuction 7">Auktionshaus Ulrich Felzmann GmbH & Co. KG</option>
+<option value="Aurea Numismatika Praha" data-number="Auction 50">Aurea Numismatika Praha</option>
+<option value="Aureo & Calicó S.L." data-number="Auction 258 - Special Selection">Aureo & Calicó S.L.</option>
+<option value="Aurora S.p.a." data-number="Online Auction 8">Aurora S.p.a.</option>
+<option value="BAC Numismatics" data-number="Auction 6">BAC Numismatics</option>
+<option value="Baldwin & Sons" data-number="Auction 73">Baldwin & Sons</option>
+<option value="Baldwin's Hong Kong Coin Auction" data-number="Auction 53">Baldwin's Hong Kong Coin Auction</option>
+<option value="Baldwin's of St. James's" data-number="Auction 1 - Argentum">Baldwin's of St. James's</option>
+<option value="BanglaNumis" data-number="Auction 7">BanglaNumis</option>
+<option value="Bentes Auctions" data-number="e-Auction 1">Bentes Auctions</option>
+<option value="Bertolami Fine Art" data-number="Auction 5">Bertolami Fine Art</option>
+<option value="Bid and Grow Corp." data-number="Auction 1">Bid and Grow Corp.</option>
+<option value="Bolaffi Spa" data-number="Auction 26">Bolaffi Spa</option>
+<option value="Briggs & Bustos" data-number="Auction 1">Briggs & Bustos</option>
+<option value="Bruun Rasmussen" data-number="Auction 856">Bruun Rasmussen</option>
+<option value="Bucephalus Numismatic" data-number="Auction 6">Bucephalus Numismatic</option>
+<option value="Burgan Numismatique - Maison Florange" data-number="November 2017 Auction">Burgan Numismatique - Maison Florange</option>
+<option value="CMA Auctions" data-number="August 2022 Auction">CMA Auctions</option>
+<option value="Casa de Subastas de Madrid" data-number="Auction 634">Casa de Subastas de Madrid</option>
+<option value="Cayón Subastas" data-number="Online Auction 2">Cayón Subastas</option>
+<option value="Centre Numismatique du Palais-Royal" data-number="Mail Bid Sale 38">Centre Numismatique du Palais-Royal</option>
+<option value="Chaponnière & Firmenich SA" data-number="Auction 4">Chaponnière & Firmenich SA</option>
+<option value="Chiswick Auctions" data-number="Spring 2024 Coin Auction">Chiswick Auctions</option>
+<option value="Christoph Gärtner GmbH & Co. KG" data-number="Danube Gold Auction">Christoph Gärtner GmbH & Co. KG</option>
+<option value="Classical Numismatic Group, LLC" data-number="Triton XV Sessions 1 & 2: BCD Thessaly">Classical Numismatic Group, LLC</option>
+<option value="Coins of History e.U." data-number="E-Live Auction 2">Coins of History e.U.</option>
+<option value="Coins of the Realm Ltd" data-number="Auction 1">Coins of the Realm Ltd</option>
+<option value="Coins.ee OY" data-number="Auction 47">Coins.ee OY</option>
+<option value="CoinsNB" data-number="E-Auction 1">CoinsNB</option>
+<option value="CollecTodo" data-number="Auction 18">CollecTodo</option>
+<option value="Colonial Acres Coins Ltd." data-number="September Premier Auction">Colonial Acres Coins Ltd.</option>
+<option value="Concordia Numismatic e.U." data-number="Auction 9">Concordia Numismatic e.U.</option>
+<option value="Corinphila Veilingen" data-number="Auction 247">Corinphila Veilingen</option>
+<option value="Creusy Numismatique" data-number="Auction 3">Creusy Numismatique</option>
+<option value="Crown Currency" data-number="Live Auction 4">Crown Currency</option>
+<option value="Daniel Frank Sedwick, LLC" data-number="Treasure Auction 14">Daniel Frank Sedwick, LLC</option>
+<option value="Dara Antiques Museum" data-number="E-Auction 2">Dara Antiques Museum</option>
+<option value="Darabanth" data-number="Auction 33">Darabanth</option>
+<option value="Davissons Ltd." data-number="Auction 31">Davissons Ltd.</option>
+<option value="Del Bosque, Briggs & Bustos" data-number="Auction 10">Del Bosque, Briggs & Bustos</option>
+<option value="Dom Aukcyjny Numimarket.pl" data-number="Auction 1">Dom Aukcyjny Numimarket.pl</option>
+<option value="Dorotheum GmbH & Co KG" data-number="May 2013 Auction">Dorotheum GmbH & Co KG</option>
+<option value="Dr. Busso Peus Nachf." data-number="Auctions 407-408">Dr. Busso Peus Nachf.</option>
+<option value="Dutch Numismatic Auction" data-number="Auction 2">Dutch Numismatic Auction</option>
+<option value="Dvin Numismatik" data-number="Auction 1">Dvin Numismatik</option>
+<option value="Editions V. Gadoury" data-number="Auction 2012">Editions V. Gadoury</option>
+<option value="Eid Mar Auctions GmbH" data-number="Auction 1">Eid Mar Auctions GmbH</option>
+<option value="Elstob & Elstob" data-number="April 2022 Numismatic Auction">Elstob & Elstob</option>
+<option value="Emporium Hamburg" data-number="Auction 67">Emporium Hamburg</option>
+<option value="Emporium Hamburg Alpha" data-number="Auction 2">Emporium Hamburg Alpha</option>
+<option value="Eretz Auctions" data-number="Auction 1">Eretz Auctions</option>
+<option value="Falcon Auctions" data-number="Auction 3">Falcon Auctions</option>
+<option value="Fellows Auctioneers Ltd" data-number="Sale 4000">Fellows Auctioneers Ltd</option>
+<option value="Feydeau Bourse Numismatique" data-number="Auction 1">Feydeau Bourse Numismatique</option>
+<option value="Filatelie Klim" data-number="Auction 67">Filatelie Klim</option>
+<option value="Fontanille Coins" data-number="Auction 74">Fontanille Coins</option>
+<option value="Frankfurter Münzhandlung Nachf. GmbH" data-number="Auction 153">Frankfurter Münzhandlung Nachf. GmbH</option>
+<option value="Freeman & Sear" data-number="Manhattan Sale 4">Freeman & Sear</option>
+<option value="Fritz Rudolf Künker GmbH & Co. KG" data-number="Auction 210">Fritz Rudolf Künker GmbH & Co. KG</option>
+<option value="GMA Numismatica Napoli srl" data-number="E-Auction 3">GMA Numismatica Napoli srl</option>
+<option value="Gemini, LLC" data-number="Auction X">Gemini, LLC</option>
+<option value="Ginza Coins" data-number="Auction 29">Ginza Coins</option>
+<option value="Golden Lion Auctions" data-number="Auction 1">Golden Lion Auctions</option>
+<option value="Gorny & Mosch" data-number="Auction 203">Gorny & Mosch</option>
+<option value="Goudwisselkantoor Veilingen" data-number="Auction 1089 and 1090">Goudwisselkantoor Veilingen</option>
+<option value="Great Coins & Art Auctions srl" data-number="Auction 4">Great Coins & Art Auctions srl</option>
+<option value="Green Apple Auction" data-number="2017 Auction">Green Apple Auction</option>
+<option value="H.D. Rauch" data-number="Auction 90">H.D. Rauch</option>
+<option value="Haljak Coin Auction" data-number="Auction 20">Haljak Coin Auction</option>
+<option value="Harlan J. Berk Ltd." data-number="Buy or Bid Sale 197">Harlan J. Berk Ltd.</option>
+<option value="Harmers of London Auctions Ltd." data-number="Auction 1">Harmers of London Auctions Ltd.</option>
+<option value="Haynault" data-number="March 2017 Coin Auction">Haynault</option>
+<option value="Heidelberger Münzhandlung Herbert Grün" data-number="Auction 60">Heidelberger Münzhandlung Herbert Grün</option>
+<option value="Helios Numismatik" data-number="Auction 8">Helios Numismatik</option>
+<option value="Hellmuth Kricheldorf Verlag e.K." data-number="Auction 49">Hellmuth Kricheldorf Verlag e.K.</option>
+<option value="Heritage Auctions Europe" data-number="Auction 66">Heritage Auctions Europe</option>
+<option value="Heritage World Coin Auctions" data-number="CICF Signature Sale 3019">Heritage World Coin Auctions</option>
+<option value="Hermitage Fine Art" data-number="November 2018 Auction">Hermitage Fine Art</option>
+<option value="Hess-Divo" data-number="Auction 339">Hess-Divo</option>
+<option value="Historama" data-number="Auction 6">Historama</option>
+<option value="Holmasto" data-number="Auction 154">Holmasto</option>
+<option value="Horizon Auction" data-number="Auction I">Horizon Auction</option>
+<option value="Hosker Haynes Auctioneers Ltd" data-number="Auction 1">Hosker Haynes Auctioneers Ltd</option>
+<option value="Hôtel des Ventes Mosan SA" data-number="September 2019 Numismatic Auction">Hôtel des Ventes Mosan SA</option>
+<option value="Ibrahim's Collectibles" data-number="Auction 2">Ibrahim's Collectibles</option>
+<option value="Império Numis" data-number="Auction 2">Império Numis</option>
+<option value="InAsta S.p.A." data-number="E-Auction 98">InAsta S.p.A.</option>
+<option value="International Coin Exchange Ltd" data-number="Auction IV">International Coin Exchange Ltd</option>
+<option value="Ira and Larry Goldberg Auctioneers" data-number="Auction 70">Ira and Larry Goldberg Auctioneers</option>
+<option value="Istra Numizmatika" data-number="Auction 1">Istra Numizmatika</option>
+<option value="Janus Auctions Ltd." data-number="World Paper Money Auction">Janus Auctions Ltd.</option>
+<option value="Jean Elsen & ses Fils" data-number="Auction 115">Jean Elsen & ses Fils</option>
+<option value="Jean Vinchon Numismatique" data-number="30 May 2017 Auction">Jean Vinchon Numismatique</option>
+<option value="Jencek Historical Enterprise, Inc." data-number="Electronic Auction #20">Jencek Historical Enterprise, Inc.</option>
+<option value="Jesus Vico S.A." data-number="Auction 131">Jesus Vico S.A.</option>
+<option value="KENDRO a.s." data-number="Auction 1">KENDRO a.s.</option>
+<option value="KM Numismatics" data-number="Auction 1">KM Numismatics</option>
+<option value="Katz Coins Notes & Supplies Corp." data-number="E-Auction 1">Katz Coins Notes & Supplies Corp.</option>
+<option value="Klondike" data-number="Auction 24">Klondike</option>
+<option value="Kolbe & Fanning" data-number="Auction 159">Kolbe & Fanning</option>
+<option value="Kölner Münzkabinett" data-number="Auction 106">Kölner Münzkabinett</option>
+<option value="La Galerie Numismatique Sarl" data-number="Auction 54">La Galerie Numismatique Sarl</option>
+<option value="La Galerie des Monnaies" data-number="Sale IV">La Galerie des Monnaies</option>
+<option value="Leipziger Münzhandlung Heidrun Höhn" data-number="Auction 74">Leipziger Münzhandlung Heidrun Höhn</option>
+<option value="Leland Little" data-number="Historic Coins Auction">Leland Little</option>
+<option value="Leu Numismatik AG" data-number="Web Auction 1">Leu Numismatik AG</option>
+<option value="London Coin Centre Inc." data-number="Auction 6">London Coin Centre Inc.</option>
+<option value="London Coin Galleries - Künker" data-number="Auction 1">London Coin Galleries - Künker</option>
+<option value="London Coin Galleries Ltd" data-number="Online Auction 3">London Coin Galleries Ltd</option>
+<option value="London Coins Ltd" data-number="Auction 145">London Coins Ltd</option>
+<option value="Lugdunum GmbH" data-number="Auction 14">Lugdunum GmbH</option>
+<option value="Luna Auc Co., Ltd." data-number="Auction Showcase II">Luna Auc Co., Ltd.</option>
+<option value="MDC Monnaies de Collection sarl" data-number="Auction 1">MDC Monnaies de Collection sarl</option>
+<option value="MKIC" data-number="Auction 1">MKIC</option>
+<option value="Macho & Chlapovič" data-number="Auction 2">Macho & Chlapovič</option>
+<option value="Maison Palombo" data-number="Auction 11">Maison Palombo</option>
+<option value="Maison Pruvost Numismatique" data-number="Auction 3">Maison Pruvost Numismatique</option>
+<option value="Marciniak | Auction House" data-number="Auction 1">Marciniak | Auction House</option>
+<option value="Marudhar Arts" data-number="Auction 18">Marudhar Arts</option>
+<option value="Matos, Esteves & Pacheco" data-number="Auction 1">Matos, Esteves & Pacheco</option>
+<option value="Meister & Sonntag" data-number="Auction 13">Meister & Sonntag</option>
+<option value="Meyer Eek AS" data-number="Auction 15">Meyer Eek AS</option>
+<option value="Millon Auctions" data-number="November 2022 Auction">Millon Auctions</option>
+<option value="Monedalia" data-number="E-Auction 1">Monedalia</option>
+<option value="Monety i Medale Romuald Sawicz" data-number="Auction 4">Monety i Medale Romuald Sawicz</option>
+<option value="Monnaies d'Antan" data-number="Auction 21">Monnaies d'Antan</option>
+<option value="Morton & Eden Ltd" data-number="Auction 63">Morton & Eden Ltd</option>
+<option value="Mowbray Collectables" data-number="Auction 31">Mowbray Collectables</option>
+<option value="Myntauktioner i Sverige AB" data-number="Auction 10">Myntauktioner i Sverige AB</option>
+<option value="Myntkompaniet/AB Philea" data-number="Coin Auction 8">Myntkompaniet/AB Philea</option>
+<option value="Münz Zentrum Heinz-W. Müller" data-number="Auction 184">Münz Zentrum Heinz-W. Müller</option>
+<option value="Münzen & Medaillen GmbH" data-number="Auction 36">Münzen & Medaillen GmbH</option>
+<option value="Münzen Gut-Lynt GmbH" data-number="Auction 1">Münzen Gut-Lynt GmbH</option>
+<option value="Münzenhandlung G. Hirsch Nachfolger" data-number="Auction 281">Münzenhandlung G. Hirsch Nachfolger</option>
+<option value="Münzenhandlung Harald Möller GmbH" data-number="Auction 62">Münzenhandlung Harald Möller GmbH</option>
+<option value="Münzenonline Auctions" data-number="Auction 4">Münzenonline Auctions</option>
+<option value="NAC Numismatica SpA" data-number="Auction 115 - with Varesi s.r.l.">NAC Numismatica SpA</option>
+<option value="NOA" data-number="Auction 1">NOA</option>
+<option value="Naville Numismatics Ltd." data-number="Auction 30">Naville Numismatics Ltd.</option>
+<option value="Nihon Coin Auction" data-number="Auction 46">Nihon Coin Auction</option>
+<option value="Noble Numismatics Pty Ltd" data-number="Auction 114">Noble Numismatics Pty Ltd</option>
+<option value="Nomisma Aste srl" data-number="Auction 1">Nomisma Aste srl</option>
+<option value="Nomisma Spa" data-number="Auction 46">Nomisma Spa</option>
+<option value="Nomos AG" data-number="Auction 6">Nomos AG</option>
+<option value="Noonans" data-number="Auction 128">Noonans</option>
+<option value="Nuance Auction Galleries, Inc." data-number="Auction 1">Nuance Auction Galleries, Inc.</option>
+<option value="Nudelman Numismatica" data-number="Auction 12">Nudelman Numismatica</option>
+<option value="Numis Arena" data-number="Auction 1">Numis Arena</option>
+<option value="Numis.be - Joselito Eeckhout" data-number="May 2012 Public Auction">Numis.be - Joselito Eeckhout</option>
+<option value="NumisCorner" data-number="Auction 1">NumisCorner</option>
+<option value="NumisPoland" data-number="Auction 1">NumisPoland</option>
+<option value="Numisa" data-number="Online Auction 1">Numisa</option>
+<option value="Numisart GmbH" data-number="Auction 2">Numisart GmbH</option>
+<option value="Numisbalt" data-number="Auction 2">Numisbalt</option>
+<option value="Numisbing, LLC" data-number="Auction 4">Numisbing, LLC</option>
+<option value="Numisfitz GmbH" data-number="Auction 1">Numisfitz GmbH</option>
+<option value="Numision" data-number="Auction 3">Numision</option>
+<option value="Numisma SA" data-number="Auction 122">Numisma SA</option>
+<option value="Numismatica Ars Classica" data-number="Auction 63">Numismatica Ars Classica</option>
+<option value="Numismatica Ferrarese" data-number="E-Auction 2">Numismatica Ferrarese</option>
+<option value="Numismatica Genevensis SA" data-number="Auction 7">Numismatica Genevensis SA</option>
+<option value="Numismatica Luciani" data-number="Auction 1">Numismatica Luciani</option>
+<option value="Numismatica Ranieri S.r.l." data-number="Auction 4">Numismatica Ranieri S.r.l.</option>
+<option value="Numismatica Tintinna" data-number="Online Auction 28">Numismatica Tintinna</option>
+<option value="Numismatik Zöttl" data-number="Auction 4">Numismatik Zöttl</option>
+<option value="Numismática Leilões" data-number="Auction 3">Numismática Leilões</option>
+<option value="Numismática ibercoin" data-number="Auction 17 - Floor auction">Numismática ibercoin</option>
+<option value="Numisor SA" data-number="Online Auction 1">Numisor SA</option>
+<option value="Nuqud Gallery" data-number="Auction 1">Nuqud Gallery</option>
+<option value="Olivier Goujon Numismatique" data-number="Mail Bid Sale 1">Olivier Goujon Numismatique</option>
+<option value="Olympus Numismatics UG" data-number="Auction 1">Olympus Numismatics UG</option>
+<option value="Oslo Myntgalleri AS" data-number="Auction 13">Oslo Myntgalleri AS</option>
+<option value="Pandolfini s.r.l." data-number="December 2023 Timed Auction">Pandolfini s.r.l.</option>
+<option value="Pannonia Terra Numizmatika" data-number="Auction 46">Pannonia Terra Numizmatika</option>
+<option value="Pashiz Coins Ltd" data-number="E-Auction 2">Pashiz Coins Ltd</option>
+<option value="Patrick Guillard Collection" data-number="E-Auction 1">Patrick Guillard Collection</option>
+<option value="Paul-Francis Jacquier Numismatique Antique" data-number="Auction 37">Paul-Francis Jacquier Numismatique Antique</option>
+<option value="Pecunem Online Auctions" data-number="Auction 1">Pecunem Online Auctions</option>
+<option value="Pegasus Auctions AB" data-number="Auction 2">Pegasus Auctions AB</option>
+<option value="Pesek Auctions" data-number="Auction 1">Pesek Auctions</option>
+<option value="Peter Rapp AG" data-number="2014 Coin Auction">Peter Rapp AG</option>
+<option value="Portuscalle Numismatica" data-number="November 2022 Auction">Portuscalle Numismatica</option>
+<option value="Postiljonen AB" data-number="Numismatic Auction 1">Postiljonen AB</option>
+<option value="Poznański Dom Aukcyjny" data-number="Auction 16">Poznański Dom Aukcyjny</option>
+<option value="Poznański Dom Aukcyjny & Podlaski Gabinet Numizmatyczny" data-number="Auction 15">Poznański Dom Aukcyjny & Podlaski Gabinet Numizmatyczny</option>
+<option value="Provenance Auctions" data-number="Auction 1">Provenance Auctions</option>
+<option value="Punctum Auctioneers Ltd." data-number="Auction 1">Punctum Auctioneers Ltd.</option>
+<option value="Raritan Stamps Inc." data-number="Auction 86">Raritan Stamps Inc.</option>
+<option value="Rhenumis by Dr. Reinhard Fischer" data-number="Auction 134">Rhenumis by Dr. Reinhard Fischer</option>
+<option value="Rimon Auctions" data-number="Auction 1">Rimon Auctions</option>
+<option value="Rio de la Plata" data-number="Online Auction 2">Rio de la Plata</option>
+<option value="Roma Numismatics Ltd" data-number="Auction III">Roma Numismatics Ltd</option>
+<option value="Romano Auctions" data-number="Auction 43">Romano Auctions</option>
+<option value="Roschberg Mynthandel AS" data-number="Online Auction 12">Roschberg Mynthandel AS</option>
+<option value="Russian Heritage" data-number="Auction 10">Russian Heritage</option>
+<option value="Rzeszowski Dom Aukcyjny" data-number="Auction 1">Rzeszowski Dom Aukcyjny</option>
+<option value="Rönesans Salzgitter GmbH" data-number="Auction 1">Rönesans Salzgitter GmbH</option>
+<option value="SIA COINSTORE" data-number="Auction 1">SIA COINSTORE</option>
+<option value="SINCONA AG" data-number="Auction 5">SINCONA AG</option>
+<option value="Sartor Numismatica" data-number="Auction 2">Sartor Numismatica</option>
+<option value="Savoca Coins" data-number="Online Auction 23 | Silver">Savoca Coins</option>
+<option value="Schulman b.v." data-number="Auction 339">Schulman b.v.</option>
+<option value="Silicua Subastas" data-number="Auction 1">Silicua Subastas</option>
+<option value="Sima Aste Srl" data-number="Auction 1">Sima Aste Srl</option>
+<option value="Skanfil Auksjoner AS" data-number="Autumn Auction 2022">Skanfil Auksjoner AS</option>
+<option value="Soler y Llach S.L." data-number="Auction 1081 - Floor Auction">Soler y Llach S.L.</option>
+<option value="Solidus Numismatik e.K." data-number="Online Auction 6">Solidus Numismatik e.K.</option>
+<option value="Sovereign Rarities Ltd" data-number="Auction 1">Sovereign Rarities Ltd</option>
+<option value="Spink" data-number="Auction 14005">Spink</option>
+<option value="Spink USA" data-number="Auction 331">Spink USA</option>
+<option value="St. James's / CNG" data-number="Auction 29 - The Lissner Collection">St. James's / CNG</option>
+<option value="St. James's Auctions" data-number="Auction 22">St. James's Auctions</option>
+<option value="Stack's Bowers & Ponterio" data-number="August 2012 ANA Auction - Sess. A">Stack's Bowers & Ponterio</option>
+<option value="Stary-Sklep Sylwester Kopyciński" data-number="Auction 2">Stary-Sklep Sylwester Kopyciński</option>
+<option value="Status International" data-number="Auction 351">Status International</option>
+<option value="Stephen Album Rare Coins" data-number="Auction 13">Stephen Album Rare Coins</option>
+<option value="Sultan's Auction" data-number="Autumn World Banknotes Auction">Sultan's Auction</option>
+<option value="Taisei" data-number="April 2019 Auction">Taisei</option>
+<option value="Tauler & Fau Subastas" data-number="Auction 1">Tauler & Fau Subastas</option>
+<option value="Tel Aviv Stamps" data-number="Auction 51">Tel Aviv Stamps</option>
+<option value="Tennants Auctioneers" data-number="August 2022 Auction">Tennants Auctioneers</option>
+<option value="Teutoburger Münzauktion GmbH" data-number="Auction 107">Teutoburger Münzauktion GmbH</option>
+<option value="The Bru Sale & Wellico Ltd." data-number="The BRU Sale 10">The Bru Sale & Wellico Ltd.</option>
+<option value="The Canadian Numismatic Company" data-number="Auction 160">The Canadian Numismatic Company</option>
+<option value="The Coin Cabinet" data-number="Auction 2">The Coin Cabinet</option>
+<option value="The Coin House" data-number="Auction 10">The Coin House</option>
+<option value="The New York Sale" data-number="Auction 30">The New York Sale</option>
+<option value="The Royal Mint" data-number="Die Trial Pieces Auction">The Royal Mint</option>
+<option value="The Scripophily Center bvba" data-number="Auction 59">The Scripophily Center bvba</option>
+<option value="Thomas Numismatics" data-number="Auction 1">Thomas Numismatics</option>
+<option value="TimeLine Auctions" data-number="Auction 116">TimeLine Auctions</option>
+<option value="Tosunidis Coin House" data-number="E-Auction 1">Tosunidis Coin House</option>
+<option value="Tradart" data-number="December 2014 Auction">Tradart</option>
+<option value="Universum Coins GmbH" data-number="Auction 1">Universum Coins GmbH</option>
+<option value="V.L. Nummus" data-number="Auction 6">V.L. Nummus</option>
+<option value="VAuctions" data-number="Triskeles Sale 19">VAuctions</option>
+<option value="VCD Auctions" data-number="World History Sale 1">VCD Auctions</option>
+<option value="VIA GmbH" data-number="E-Auction 2">VIA GmbH</option>
+<option value="Varesi s.r.l." data-number="Vicenza Auction">Varesi s.r.l.</option>
+<option value="WAG Online oHG" data-number="Auction 29">WAG Online oHG</option>
+<option value="WDA - MiM" data-number="Auction 5">WDA - MiM</option>
+<option value="Wannenes Art Auctions" data-number="Auction 244">Wannenes Art Auctions</option>
+<option value="Warin Global Investments" data-number="Online Auction 1">Warin Global Investments</option>
+<option value="Warszawskie Centrum Numizmatyczne" data-number="Auction 52">Warszawskie Centrum Numizmatyczne</option>
+<option value="Westfälische Auktionsgesellschaft" data-number="Auction 61">Westfälische Auktionsgesellschaft</option>
+<option value="Wilkes & Curtis" data-number="Auction 1">Wilkes & Curtis</option>
+<option value="World Banknote Auctions" data-number="Sale 1">World Banknote Auctions</option>
+<option value="Wójcicki - The Polish Auction House" data-number="Auction 1">Wójcicki - The Polish Auction House</option>
+<option value="Zeus Numismatics" data-number="Auction 1">Zeus Numismatics</option>
+<option value="cgb.fr" data-number="Mail Bid Sale 56">cgb.fr</option>
+<option value="iBelgica" data-number="Autumn Auction 2014">iBelgica</option>
+<option value="iNumis" data-number="May 2012 Auction">iNumis</option>
 
         </select>
         <br><br>
         <label for="auctionNumberInput">Filter by Auction Number:</label>
         <input type="text" id="auctionNumberInput" oninput="filterTable()" placeholder="Enter auction number">
+        <br><br>
+        <label for="lotNumberInput">Enter Lot Number:</label>
+        <input type="text" id="lotNumberInput">
+        <button onclick="generateLotLink()">Generate Lot Link</button>
+        <br><br>
+        <div id="linkOutput"></div>
         <br><br>
         
         <table id="dataTable">
